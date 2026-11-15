@@ -59,6 +59,40 @@ function App() {
       });
   }
 
+  function handleAddLike(id, currentLikes){
+
+    fetch(`http://localhost:3001/toys/${id}`,{
+       method: "PATCH",
+       headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      likes: currentLikes + 1
+    })
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("Failed to update toy likes");
+        }
+        return response.json();
+      })
+      .then ((updatedToy) => {
+        setToys(currentToys=>
+          currentToys.map(toy =>
+          toy.id === updatedToy.id ? updatedToy : toy
+        )
+      );
+
+        
+        
+      })
+      .catch(error => {
+        console.error("Error updating toy likes:", error);
+      });
+
+
+  }
+
 
   return (
     <>
@@ -69,6 +103,7 @@ function App() {
       </div>
       <ToyContainer toys={toys} 
                     onDonate={handleDeleteToy}
+                    onAddLike={handleAddLike}
       />
     </>
   );
