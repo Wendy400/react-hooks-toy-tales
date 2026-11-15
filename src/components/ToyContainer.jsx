@@ -1,7 +1,7 @@
 import React from "react";
 import ToyCard from "./ToyCard";
 
-function ToyContainer({toys, onDonate}) {
+function ToyContainer({toys, onDonate, onAddLike}) {
   return (
     /* Render the collection of ToyCards */
     <div id="toy-collection"> 
@@ -10,6 +10,7 @@ function ToyContainer({toys, onDonate}) {
       <ToyCard key ={toy.id}
           toys= {toy}
           onDonate= {onDonate}
+          onAddLike={onAddLike}
           />
         
 
