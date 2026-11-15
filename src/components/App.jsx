@@ -22,8 +22,8 @@ function App() {
           return response.json()
         }
       }))
-      .then((toys) =>{ setToys(toys)
-      console.log(toys)})
+      .then((toys) =>{ setToys(toys)})
+      //console.log(toys)})
       .catch((error) => { console.error("Ooops a problem occured:", error) })
 
   }
@@ -33,11 +33,17 @@ function App() {
 
   }, [])
 
+  function handleNewToy (newToy){
+    setToys([...toys, newToy])
+
+  }
+
+
 
   return (
     <>
       <Header />
-      {showForm ? <ToyForm /> : null}
+      {showForm ? <ToyForm onCreateNewToy = {handleNewToy}/> : null}
       <div className="buttonContainer">
         <button onClick={handleClick}>Add a Toy</button>
       </div>
